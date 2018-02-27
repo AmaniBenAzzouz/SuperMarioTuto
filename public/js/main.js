@@ -42,7 +42,7 @@ Promise.all([
     }
 });
 input.listenTo(window);
-['mouseup','mousedown'].forEach(eventName =>{
+['mousedown','mouseup'].forEach(eventName =>{
     canvas.addEventListener(eventName,event => {
         //var buttonPressed = instanceOfMouseEvent.button
         /**
@@ -69,7 +69,7 @@ input.listenTo(window);
         //mario.update(deltaTime);
         level.update(deltaTime);
         //console.log(mario.pos);
-        //mario.vel.y += gravity * deltaTime; //gravity : return to bottom slowely 0.5 each frame
+        mario.vel.y += gravity * deltaTime; //gravity : return to bottom slowely 0.5 each frame
         
         //requestAnimationFrame(updateGame);
         //setTimeout(updateGame,1000/144,performance.now());
