@@ -1,12 +1,12 @@
 export function createBackgroundLayer(level,sprites){
-    //make all background in one canvas so wan we update we call it all
+    //make all background in one canvas so when we update we call it all
     //as one peace and not each element apart
     const backgroundBuffer = document.createElement('canvas');
     backgroundBuffer.width = 256;
     backgroundBuffer.height = 240;
     const context = backgroundBuffer.getContext('2d');
     level.tiles.forEach((tile,x,y) => {
-        //the function will be excuted in lavel class with 
+        //the function will be excuted in level class with 
         //passed argument from there
         sprites.drawTile(tile.name,context,x,y);
     });

@@ -14,7 +14,7 @@ export default class Level{
             entity.update(deltaTime);//super mario position
             this.TileCollider.test(entity);
             //depending on current postion
-            //and all elements postions check collession
+            //and all elements postions to check if there is collision
         });
     }
 }

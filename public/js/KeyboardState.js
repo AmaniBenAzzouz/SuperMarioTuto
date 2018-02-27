@@ -13,7 +13,7 @@ export default class KeybordState {
     handelEvent(event){
         const {keyCode} = event;
         //if event is not added do nothing 
-        //else prevent it from firring twice using preventDefault
+        //else prevent it from firing twice using preventDefault
         if(!this.keyMap.has(keyCode)){
            return ;
         }

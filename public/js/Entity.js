@@ -15,8 +15,8 @@ export default class Entity{
     }
     addTrait(trait){
         this.traits.push(trait);
-        //add method denamiclly
-        //this method name = some function
+        //add method dynamically
+        //this method methodName = some function
         this[trait.name] = trait;
     }
     //if we update mario we update all active movments

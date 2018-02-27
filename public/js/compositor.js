@@ -8,7 +8,6 @@ export default class Compositor {
         this.layers.forEach(layer =>{
             //console.log(layer);
             //execute the function returned by createBackgroundLayer
-            // we called locally layer
             layer(context);
         });
 

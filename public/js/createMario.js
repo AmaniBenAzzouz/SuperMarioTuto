@@ -1,4 +1,3 @@
-//if we use default in the exported module we import it without {}
 import Entity  from './Entity.js';
 import Velocity from './trails/velocity.js';
 import Jump from './trails/jump.js';
@@ -12,7 +11,7 @@ export function createMario(){
         mario.addTrait(new Velocity());
         mario.addTrait(new Jump());
         //we can attach a method from outside a class like this 
-        //ps this function/method has access to this element
+        //ps this function/method has access to 'this' object
         mario.draw = function dawMario(context){
             marioSprite.draw('mario',context,this.pos.x,this.pos.y);
         }
