@@ -20,15 +20,12 @@ Promise.all([
 ]).then(([mario,level])=>{
 
     const gravity = 2000;
-    const timer = new Timer(1/60);
     mario.pos.set(64,64);
+    const SPACE = 32;
+    const input = new KeybordState();
+    
     level.entities.add(mario);
 
-    //velocity needed for movments
-    //why because if we need a courbe like parabol, linear etc y =f(y)
-    //mario.vel.set(200,-600);
-    const input = new KeybordState();
-    const SPACE = 32;
     //add keybord and action to do if it is pressed
     input.addingMapping(SPACE,keyState =>{
     if(keyState){
@@ -40,6 +37,9 @@ Promise.all([
         //cancel jump
         mario.Jump.cancel();
     }
+    //velocity needed for movments
+    //why because if we need a courbe like parabol, linear etc y =f(y)
+    //mario.vel.set(200,-600);
 });
 input.listenTo(window);
 ['mousedown','mouseup'].forEach(eventName =>{
@@ -60,17 +60,18 @@ input.listenTo(window);
         }
     });
 });
+    const timer = new Timer(1/60);
     //timer.start();
     timer.update = function updateGame(deltaTime){
         //we draw all element in the compositor
+        mario.update(deltaTime);
         level.comp.draw(context);
         /*marioSprite.draw('mario',context,positions.x,positions.y);
         we moved this as own function : see above */
-        //mario.update(deltaTime);
         level.update(deltaTime);
         //console.log(mario.pos);
         mario.vel.y += gravity * deltaTime; //gravity : return to bottom slowely 0.5 each frame
-        
+            
         //requestAnimationFrame(updateGame);
         //setTimeout(updateGame,1000/144,performance.now());
         //request animation passes time == performance.now in setTimeOut
