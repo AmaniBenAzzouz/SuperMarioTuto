@@ -30,38 +30,51 @@ Promise.all([
 
     //add keybord and action to do if it is pressed
     input.addingMapping(SPACE,keyState =>{
-    if(keyState){
-        //if space is 1-> pressed: start jumping
-        //mario jump
-        mario.Jump.start();
-    }
-    else {
-        //cancel jump
-        mario.Jump.cancel();
-    }
-    //velocity needed for movments
-    //why because if we need a courbe like parabol, linear etc y =f(y)
-    //mario.vel.set(200,-600);
-});
-input.listenTo(window);
-['mousedown','mousemove'].forEach(eventName =>{
-    canvas.addEventListener(eventName,event => {
-        //var buttonPressed = instanceOfMouseEvent.button
-        /**
-         * A number representing a given button:
-
-            0: Main button pressed, usually the left button or the un-initialized state
-            1: Auxiliary button pressed, usually the wheel button or the middle button (if present)
-            2: Secondary button pressed, usually the right button
-            3: Fourth button, typically the Browser Back button
-            4: Fifth button, typically the Browser Forward button
-        */
-        if(event.buttons === 1){
-            mario.vel.set(0,0);
-            mario.pos.set(event.offsetX,event.offsetY);
+        if(keyState){
+            //if space is 1-> pressed: start jumping
+            //mario jump
+            mario.Jump.start();
         }
+        else {
+            //cancel jump
+            mario.Jump.cancel();
+        }
+        //velocity needed for movments
+        //why because if we need a courbe like parabol, linear etc y =f(y)
+        //mario.vel.set(200,-600);
     });
-});
+
+    input.addingMapping(37,keyState => {
+        //left
+        mario.Walk.direction = keyState;
+    });
+
+    input.addingMapping(39,keyState => {
+        //move right
+        mario.Walk.direction = -keyState;
+
+    });
+
+    input.listenTo(window);
+    
+    ['mousedown','mousemove'].forEach(eventName =>{
+        canvas.addEventListener(eventName,event => {
+            //var buttonPressed = instanceOfMouseEvent.button
+            /**
+             * A number representing a given button:
+
+                0: Main button pressed, usually the left button or the un-initialized state
+                1: Auxiliary button pressed, usually the wheel button or the middle button (if present)
+                2: Secondary button pressed, usually the right button
+                3: Fourth button, typically the Browser Back button
+                4: Fifth button, typically the Browser Forward button
+            */
+            if(event.buttons === 1){
+                mario.vel.set(0,0);
+                mario.pos.set(event.offsetX,event.offsetY);
+            }
+        });
+    });
     const timer = new Timer(1/60);
     //timer.start();
     timer.update = function updateGame(deltaTime){

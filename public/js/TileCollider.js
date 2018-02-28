@@ -9,12 +9,10 @@ export default class TileCollider {
     }
 
     checkY(entity){
-        //console.log(entity.pos,entity.size);
         const matches = this.tiles.searchByRange(
             entity.pos.x, entity.pos.x + entity.size.x, 
             entity.pos.y, entity.pos.y + entity.size.y);
         
-        //console.log(matches);
         matches.forEach(match => {
             if(match != undefined){
                 if(match.tile.name !== 'ground'){
