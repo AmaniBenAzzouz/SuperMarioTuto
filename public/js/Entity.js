@@ -11,6 +11,7 @@ export default class Entity{
     constructor(){
         this.pos = new Vectors(0,0);
         this.vel = new Vectors(0,0);
+        this.size = new Vectors(0,0);
         this.traits =[]  ;//mario movments
     }
     addTrait(trait){
