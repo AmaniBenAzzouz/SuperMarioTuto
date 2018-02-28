@@ -24,6 +24,9 @@ export class Matrix{
             });
         });
     }
+    clear() {
+        this.grid.length = 0;
+    }
     set(x,y,value){
         if(! this.grid[x]){
             this.grid[x] = []; 

@@ -1,6 +1,6 @@
 import {loadLevel} from  './loaders.js';
 import {loadBackgroundSprites} from './sprites.js';
-import {createBackgroundLayer,createSprite} from './layers.js';
+import {createBackgroundLayer,createCollesionLayer} from './layers.js';
 import {createMario} from './createMario.js';
 import Timer from './Timer.js';
 import KeybordState from './KeyboardState.js';
@@ -21,10 +21,12 @@ Promise.all([
 
     const gravity = 2000;
     mario.pos.set(64,64);
+    //createCollesionLayer(level);
     const SPACE = 32;
     const input = new KeybordState();
     
     level.entities.add(mario);
+    level.comp.layers.push(createCollesionLayer(level));
 
     //add keybord and action to do if it is pressed
     input.addingMapping(SPACE,keyState =>{
@@ -42,7 +44,7 @@ Promise.all([
     //mario.vel.set(200,-600);
 });
 input.listenTo(window);
-['mousedown','mouseup'].forEach(eventName =>{
+['mousedown','mousemove'].forEach(eventName =>{
     canvas.addEventListener(eventName,event => {
         //var buttonPressed = instanceOfMouseEvent.button
         /**

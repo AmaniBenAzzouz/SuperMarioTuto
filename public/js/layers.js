@@ -39,3 +39,26 @@ export function createSprite(entities){
         
     }
 }
+export function createCollesionLayer(level) {
+        const tileResolver = level.tileCollider.tiles;
+        const tileSize = tileResolver.tileSize;
+    
+        const resolvedTiles = new Matrix();
+    
+        const getByIndexOriginal = tileResolver.getByIndex;
+    
+        tileResolver.getByIndex = function getByIndexFake(x, y) {
+            resolvedTiles.set(x, y, true);
+            return getByIndexOriginal.call(tileResolver, x, y);
+        }
+    
+        return function drawCollisions(context) {
+            context.strokeStyle = 'blue';
+            resolvedTiles.forEach((value, x, y) => {
+                context.beginPath();
+                context.rect(x * tileSize, y * tileSize, tileSize, tileSize);
+                context.stroke();
+            });
+            resolvedTiles.clear();
+        };
+    }

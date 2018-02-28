@@ -6,13 +6,13 @@ export default class Level{
         this.comp = new Compositor();
         this.entities = new Set();//we add to set
         this.tiles = new Matrix();
-        this.TileCollider = new TileCollider(this.tiles);
+        this.tileCollider = new TileCollider(this.tiles);
     }
 
     update(deltaTime){
         this.entities.forEach(entity =>{
             entity.update(deltaTime);//super mario position
-            this.TileCollider.test(entity);
+            this.tileCollider.test(entity);
             //depending on current postion
             //and all elements postions to check if there is collision
         });
