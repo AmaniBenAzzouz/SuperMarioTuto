@@ -46,17 +46,17 @@ Promise.all([
 
     input.addingMapping(37,keyState => {
         //left
-        mario.Walk.direction = keyState;
+        mario.Walk.direction = -keyState;
     });
 
     input.addingMapping(39,keyState => {
         //move right
-        mario.Walk.direction = -keyState;
+        mario.Walk.direction = keyState;
 
     });
 
     input.listenTo(window);
-    
+
     ['mousedown','mousemove'].forEach(eventName =>{
         canvas.addEventListener(eventName,event => {
             //var buttonPressed = instanceOfMouseEvent.button
