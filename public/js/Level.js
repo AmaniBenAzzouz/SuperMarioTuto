@@ -7,12 +7,20 @@ export default class Level{
         this.entities = new Set();//we add to set
         this.tiles = new Matrix();
         this.tileCollider = new TileCollider(this.tiles);
+        this.gravity = 2000;
     }
 
     update(deltaTime){
         this.entities.forEach(entity =>{
             entity.update(deltaTime);//super mario position
-            this.tileCollider.test(entity);
+            
+            entity.pos.x += entity.vel.x * deltaTime;
+            this.tileCollider.checkX(entity);
+
+            entity.pos.y += entity.vel.y * deltaTime;
+            this.tileCollider.checkY(entity);
+
+            entity.vel.y += this.gravity * deltaTime;
             //depending on current postion
             //and all elements postions to check if there is collision
         });

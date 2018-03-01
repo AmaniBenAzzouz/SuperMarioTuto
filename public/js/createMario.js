@@ -12,7 +12,7 @@ export function createMario(){
         mario.size.set(96,96);
         mario.addTrait(new Jump());
         mario.addTrait(new Walk());
-        mario.addTrait(new Velocity());
+        //mario.addTrait(new Velocity());
         
         //we can attach a method from outside a class like this 
         //ps this function/method has access to 'this' object
