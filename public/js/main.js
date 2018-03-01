@@ -1,10 +1,10 @@
 import {loadLevel} from  './loaders.js';
-import {loadBackgroundSprites} from './sprites.js';
+import {loadBackgroundSprites, loadMarioSprite} from './sprites.js';
 import {createBackgroundLayer,createCollesionLayer} from './layers.js';
 import {createMario} from './createMario.js';
 import Timer from './Timer.js';
-import KeybordState from './KeyboardState.js';
 import Level from './Level.js';
+import {setUpInputs} from './input.js';
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext('2d');
@@ -22,38 +22,10 @@ Promise.all([
     const gravity = 2000;
     mario.pos.set(64,64);
     //createCollesionLayer(level);
-    const SPACE = 32;
-    const input = new KeybordState();
-    
     level.entities.add(mario);
     level.comp.layers.push(createCollesionLayer(level));
 
-    //add keybord and action to do if it is pressed
-    input.addingMapping(SPACE,keyState =>{
-        if(keyState){
-            //if space is 1-> pressed: start jumping
-            //mario jump
-            mario.Jump.start();
-        }
-        else {
-            //cancel jump
-            mario.Jump.cancel();
-        }
-        //velocity needed for movments
-        //why because if we need a courbe like parabol, linear etc y =f(y)
-        //mario.vel.set(200,-600);
-    });
-
-    input.addingMapping(37,keyState => {
-        //left
-        mario.Walk.direction = -keyState;
-    });
-
-    input.addingMapping(39,keyState => {
-        //move right
-        mario.Walk.direction = keyState;
-
-    });
+    const input = setUpInputs(mario);
 
     input.listenTo(window);
 
