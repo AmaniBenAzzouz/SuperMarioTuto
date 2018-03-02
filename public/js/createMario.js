@@ -9,7 +9,7 @@ export function createMario(){
     return loadMarioSprite()
     .then(marioSprite=>{
         const mario = new Entity();
-        mario.size.set(96,96);
+        mario.size.set(14,16);
         mario.addTrait(new Jump());
         mario.addTrait(new Walk());
         //mario.addTrait(new Velocity());
@@ -17,7 +17,7 @@ export function createMario(){
         //we can attach a method from outside a class like this 
         //ps this function/method has access to 'this' object
         mario.draw = function dawMario(context){
-            marioSprite.draw('mario',context,this.pos.x,this.pos.y);
+            marioSprite.draw('mario',context,0,0);
         }
         
         

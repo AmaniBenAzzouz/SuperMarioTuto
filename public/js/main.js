@@ -5,6 +5,8 @@ import {createMario} from './createMario.js';
 import Timer from './Timer.js';
 import Level from './Level.js';
 import {setUpInputs} from './input.js';
+import Camera from './Camera.js';
+import {setupMousedebbug} from './debbug.js';
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext('2d');
@@ -21,6 +23,8 @@ Promise.all([
 
     const gravity = 2000;
     mario.pos.set(64,64);
+    const camera = new Camera();
+    window.camera = camera;
     //createCollesionLayer(level);
     level.entities.add(mario);
     level.comp.layers.push(createCollesionLayer(level));
@@ -28,31 +32,14 @@ Promise.all([
     const input = setUpInputs(mario);
 
     input.listenTo(window);
-
-    ['mousedown','mousemove'].forEach(eventName =>{
-        canvas.addEventListener(eventName,event => {
-            //var buttonPressed = instanceOfMouseEvent.button
-            /**
-             * A number representing a given button:
-
-                0: Main button pressed, usually the left button or the un-initialized state
-                1: Auxiliary button pressed, usually the wheel button or the middle button (if present)
-                2: Secondary button pressed, usually the right button
-                3: Fourth button, typically the Browser Back button
-                4: Fifth button, typically the Browser Forward button
-            */
-            if(event.buttons === 1){
-                mario.vel.set(0,0);
-                mario.pos.set(event.offsetX,event.offsetY);
-            }
-        });
-    });
+    setupMousedebbug(canvas,mario,camera);
+    
     const timer = new Timer(1/60);
     //timer.start();
     timer.update = function updateGame(deltaTime){
         //we draw all element in the compositor
         mario.update(deltaTime);
-        level.comp.draw(context);
+        level.comp.draw(context,camera);
         /*marioSprite.draw('mario',context,positions.x,positions.y);
         we moved this as own function : see above */
         level.update(deltaTime);

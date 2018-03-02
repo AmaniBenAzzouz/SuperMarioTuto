@@ -4,11 +4,11 @@ export default class Compositor {
         this.layers =[];
     }
 
-    draw(context){
+    draw(context,camera){
         this.layers.forEach(layer =>{
             //console.log(layer);
             //execute the function returned by createBackgroundLayer
-            layer(context);
+            layer(context,camera);
         });
 
     }
